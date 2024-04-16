@@ -2,16 +2,16 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 const VanDetail = () => {
-    const params = useParams()
-    //or const { id } from useParams() since we saved the nested path as id
-    console.log(params)
+  const params = useParams()
+  //or const { id } from useParams() since we saved the nested path as id
+  console.log(params)
 
-    
 
-    React.useEffect(()=>{
-        fetch(`/api/vans/${params.id}`)
-            .then(res => res.json())
-            .then(data=> console.log(data)
+
+  React.useEffect(() => {
+    fetch(`/api/vans/${params.id}`)
+      .then(res => res.json())
+      .then(data => console.log(data))
     }, [params.id])
 
   return (
