@@ -1,16 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 const Header = () => {
+    const active = {
+        fontWeight : "bold",
+        textDecoration : "underline",
+        color: "#161616"
+    };
+    
     return (
         <div>
             <header>
                 <Link to="/">#VANLIFE</Link>
                 <nav>
-                    <Link to="/host">Host</Link>
-                    <Link to="/">Home</Link>
-                    <Link to="/about">About</Link>
-                    <Link to="/vans">Vans</Link>
+                    <NavLink style={({isActive})=> isActive ? active : null} to="/host">Host</NavLink>
+                    <NavLink style={({isActive})=> isActive ? active : null} to="/">Home</NavLink>
+                    <NavLink style={({isActive})=> isActive ? active : null} to="/about">About</NavLink>
+                    <NavLink style={({isActive})=> isActive ? active : null} to="/vans">Vans</NavLink>
                 </nav>
             </header>
         </div>
