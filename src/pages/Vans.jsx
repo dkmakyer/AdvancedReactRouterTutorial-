@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 
 const Vans = () => {
     const [vans, setVans] = React.useState([])
@@ -9,8 +9,14 @@ const Vans = () => {
             .then(res => res.json())
             .then(data => setVans(data.vans))
     }, [])
+
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const typeFilter = searchParams.get("type");
+
+    const displayedVans = typeFilter ? vans.filter(van => van.type === typeFilter) : vans;
     
-    const vanElements = vans.map(van => (
+    const vanElements =displayedVans.map(van => (
         <div key={van.id} className="van-tile">
             <Link to={`/vans/:${van.id}`}>
                 <img src={van.imageUrl} />
@@ -26,6 +32,12 @@ const Vans = () => {
     return (
         <div className='van-list-container'>
             <h1>Explore our van options</h1>
+            <div className='van-list-filter-buttons'>
+                <Link className="van-type simple" to="?type=simple">simple</Link>
+                <Link className="van-type luxury" to="?type=luxury">luxury</Link>
+                <Link className="van-type rugged" to="?type=rugged">rugged</Link>
+                <Link className="van-type clear-filters" to=".">clear</Link>
+            </div>
             <div className="van-list">
                 {vanElements}
             </div>
@@ -34,3 +46,6 @@ const Vans = () => {
 }
 
 export default Vans
+
+
+
